@@ -1,6 +1,6 @@
 ## Linux系统通用 安装JDK1.8
 1. 官网下载JDK      
-[JDK官方下载链接](*https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)     需要同意协议    
+[JDK官方下载链接](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)     需要同意协议    
 ![点击同意协议](/image/Ubuntu安装JDK官网截图.jpg)
 选择对应的版本开始下载
 2. 解压
