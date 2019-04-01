@@ -67,3 +67,22 @@ private Animal animal;
 public class cat implements Animal{}
 ```
 告诉 Spring IoC 容器，当发现存在多个同样类型的Bean时，优先使用我注入
+### @Qualifier
+```
+@Component
+public class BussinessPerson implements Person {
+
+    @AutoWired
+    @Qualifier("cat")
+    private Animal animal;
+}
+
+@Component
+@Qualifier("cat")
+public class Cat implements Animal {}
+
+@Component
+@Qualifier("dog")
+public class Dog implements Animal {}
+```
+使用 @Qualifier 实现通过类型和名称找到Bean
