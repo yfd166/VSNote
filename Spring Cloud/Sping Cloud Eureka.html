@@ -1,0 +1,407 @@
+<!DOCTYPE html><html><head>
+      <title>Sping Cloud Eureka</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="spring-cloud%E7%BB%84%E4%BB%B6%E6%90%AD%E5%BB%BA-eureka-%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83">Spring Cloud&#x7EC4;&#x4EF6;&#xFF1A;&#x642D;&#x5EFA; Eureka &#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;</h1>
+
+<h2 class="mume-header" id="%E7%AE%80%E4%BB%8B">&#x7B80;&#x4ECB;</h2>
+
+<p>Eureka&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x662F;netflix&#x5F00;&#x6E90;&#x7EC4;&#x7EC7;&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x5728;&#x524D;&#x7AEF;&#x65F6;&#x95F4;&#x4E00;&#x76F4;&#x5728;&#x75AF;&#x4F20;&#x7684;2.0&#x5F00;&#x6E90;&#x6D41;&#x4EA7;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x4E0D;&#x5F71;&#x54CD;&#x6211;&#x4EEC;&#x7684;&#x4F7F;&#x7528;&#xFF0C;netflix&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x4E0D;&#x518D;&#x7EF4;&#x62A4;2.0&#x5206;&#x652F;&#x7684;&#x5F00;&#x6E90;&#x4EE3;&#x7801;&#xFF0C;&#x6240;&#x4EE5;&#x505A;&#x51FA;&#x4E86;&#x514D;&#x8D23;&#x58F0;&#x660E;&#xFF0C;&#x4E0D;&#x8FC7;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x8005;&#x6765;&#x8BF4;&#x786E;&#x5B9E;&#x6BD4;&#x8F83;&#x62C5;&#x5FC3;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x8FD8;&#x6709;&#x4E0D;&#x5C11;&#x4EBA;&#x66F4;&#x6362;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;zookeeper&#x3001;consul&#x3002;</p>
+<p>&#x5F53;&#x7136;&#x5BF9;&#x4E8E;Eureka 2.0 &#x6D41;&#x4EA7;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x5C31;&#x5F53;&#x505A;&#x4E00;&#x573A;&#x95F9;&#x5267;&#x6765;&#x5BF9;&#x5F85;&#x5427;&#xFF0C;&#x56E0;&#x4E3A;SpringCloud.Finchley.SR1&#x7248;&#x672C;&#x4F9D;&#x8D56;&#x7684;Eureka&#x662F;1.9.3&#xFF0C;&#x6839;&#x672C;&#x4E0D;&#x9700;&#x8981;&#x8003;&#x8651;&#x5230;&#x8FD9;&#x4E00;&#x70B9;&#x4E86;&#x3002;<br>
+&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x6765;&#x5173;&#x5FC3;&#x6211;&#x4EEC;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x5FAE;&#x670D;&#x52A1;&#x67B6;&#x6784;&#x7CFB;&#x7EDF;&#x8BE5;&#x600E;&#x4E48;&#x53BB;&#x8BBE;&#x8BA1;&#x3002;</p>
+<h2 class="mume-header" id="%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE">&#x6784;&#x5EFA;&#x9879;&#x76EE;</h2>
+
+<p>&#x8DDF;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x6784;&#x5EFA;<code>SpringBoot</code>&#x9879;&#x76EE;&#x4E00;&#x6837;&#xFF0C; &#x4F7F;&#x7528;idea&#x5DE5;&#x5177;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;SpringBoot&#x9879;&#x76EE;&#xFF0C;&#x5728;&#x9009;&#x62E9;&#x4F9D;&#x8D56;&#x7684;&#x754C;&#x9762;&#x52FE;&#x9009;Cloud Discovert -&gt; Eureka Server&#x4F9D;&#x8D56;&#xFF0C;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#x7684;pom.xml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">&quot;</span></span>
+         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">&gt;</span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>parent</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-starter-parent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.1.4.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>relativePath</span><span class="token punctuation">/&gt;</span></span> <span class="token comment">&lt;!-- lookup parent from repository --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>parent</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.example<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">&gt;</span></span>Demo project for Spring Boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>java.version</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>java.version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- SpringCloud&#x6700;&#x65B0;&#x7A33;&#x5B9A;&#x7248;&#x672C; --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>spring-cloud.version</span><span class="token punctuation">&gt;</span></span>Greenwich.SR1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>spring-cloud.version</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--Netflix Eureka&#x4F9D;&#x8D56;--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-netflix-eureka-server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+ <span class="token comment">&lt;!--SpringCloud&#x4F9D;&#x8D56;&#x7248;&#x672C;&#x7BA1;&#x7406;--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-dependencies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>${spring-cloud.version}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>import<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugins</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-maven-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugins</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">&gt;</span></span>
+</pre><p>&#x6211;&#x4EEC;&#x5728;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x9879;&#x76EE;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x9009;&#x62E9;&#x4E86;&#x76F8;&#x5173;SpringCloud&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x5219;&#x4F1A;&#x81EA;&#x52A8;&#x5728;pom.xml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x6DFB;&#x52A0;SpringCloud&#x6700;&#x65B0;&#x7A33;&#x5B9A;&#x7248;&#x672C;&#x4F9D;&#x8D56;&#x914D;&#x7F6E;&#x3002;<br>
+spring-cloud-dependencies&#x8FD9;&#x4E2A;&#x4F9D;&#x8D56;&#x662F;SpringCloud&#x5185;&#x6240;&#x9700;&#x8981;&#x4F9D;&#x8D56;&#x7684;&#x7248;&#x672C;&#x7EF4;&#x62A4;&#xFF0C;&#x5728;maven&#x9879;&#x76EE;&#x5185;&#x5982;&#x679C;&#x88AB;<code>&lt;dependencyManagement&gt;</code>&#x5185;&#x4FEE;&#x9970;&#x7684;<code>&lt;dependency&gt;</code>&#xFF0C;&#x5B50;&#x9879;&#x76EE;&#x6216;&#x8005;&#x672C;&#x9879;&#x76EE;&#x5728;&#x4F7F;&#x7528;&#x65F6;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;<code>&lt;dependencyManagement&gt;</code>&#x4E0B;<code>&lt;dependency&gt;</code>&#x5185;&#x8BBE;&#x7F6E;&#x7684;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x3002;<br>
+&#x6B63;&#x56E0;&#x5982;&#x6B64;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E86;spring-cloud-dependencies&#x4F9D;&#x8D56;&#x540E;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x76F8;&#x5173;SpringCloud&#x63D2;&#x4EF6;&#x65F6;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x6DFB;&#x52A0;version&#x6807;&#x7B7E;&#x8BBE;&#x7F6E;&#x5BFC;&#x5165;&#x6307;&#x5B9A;&#x7248;&#x672C;&#x7684;&#x4F9D;&#x8D56;&#x3002;</p>
+<h2 class="mume-header" id="eureka-server-%E7%9A%84%E9%85%8D%E7%BD%AE">Eureka Server &#x7684;&#x914D;&#x7F6E;</h2>
+
+<p>&#x6DFB;&#x52A0;spring-cloud-starter-netflix-eureka-server&#x4F9D;&#x8D56;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x770B;&#x770B;&#x600E;&#x4E48;&#x5F00;&#x542F;Eureka Server&#x670D;&#x52A1;&#x3002;&#x5F00;&#x542F;Eureka&#x7684;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x670D;&#x52A1;&#x7AEF;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x6CE8;&#x610F;&#x4E24;&#x4E2A;&#x5730;&#x65B9;&#x3002;</p>
+<ul>
+<li>&#x7B2C;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x662F;&#x5728;&#x5165;&#x53E3;&#x7C7B;&#x4E0A;&#x6DFB;&#x52A0;&#x542F;&#x7528;Eureka Server&#x7684;&#x6CE8;&#x89E3;@EnableEurekaServer&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<pre data-role="codeBlock" data-info="java" class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableEurekaServer</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DemoApplication</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">DemoApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</pre></li>
+<li>&#x7B2C;&#x4E8C;&#x4E2A;&#x5730;&#x65B9;&#x662F;application.yml/application.properties&#x6587;&#x4EF6;&#x5185;&#x6DFB;&#x52A0;&#x914D;&#x7F6E;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<pre data-role="codeBlock" data-info="yml" class="language-yaml"><span class="token comment"># &#x670D;&#x52A1;&#x540D;&#x79F0;</span>
+<span class="token key atrule">spring</span><span class="token punctuation">:</span>
+    <span class="token key atrule">application</span><span class="token punctuation">:</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> hengboy<span class="token punctuation">-</span>spring<span class="token punctuation">-</span>cloud<span class="token punctuation">-</span>eureka
+<span class="token comment"># &#x670D;&#x52A1;&#x7AEF;&#x53E3;&#x53F7;</span>
+<span class="token key atrule">server</span><span class="token punctuation">:</span>
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8880</span>
+
+<span class="token comment">#Eureka &#x76F8;&#x5173;&#x914D;&#x7F6E;</span>
+<span class="token key atrule">eureka</span><span class="token punctuation">:</span>
+    <span class="token key atrule">client</span><span class="token punctuation">:</span>
+        <span class="token key atrule">service-url</span><span class="token punctuation">:</span>
+            <span class="token key atrule">defaultZone</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//localhost<span class="token punctuation">:</span>$<span class="token punctuation">{</span>server.port<span class="token punctuation">}</span>/eureka/
+        <span class="token comment"># &#x662F;&#x5426;&#x4ECE;&#x5176;&#x4ED6;&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x540C;&#x6B65;&#x670D;&#x52A1;&#x5217;&#x8868;</span>
+        <span class="token key atrule">fetch-registry</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+        <span class="token comment"># &#x662F;&#x5426;&#x628A;&#x81EA;&#x5DF1;&#x4F5C;&#x4E3A;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x5230;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;</span>
+        <span class="token key atrule">register-with-eureka</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+</pre></li>
+<li><a href="http://spring.application.name">spring.application.name</a>:&#x670D;&#x52A1;&#x540D;&#x79F0;</li>
+<li>server.port:&#x670D;&#x52A1;&#x7AEF;&#x53E3;&#x53F7;</li>
+<li>eureka.client.service-url.defaultZone:Eureka&#x9ED8;&#x8BA4;&#x7684;&#x670D;&#x52A1;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x4FE1;&#x606F;&#x914D;&#x7F6E;</li>
+<li>eureka.client.fetch-registry:&#x662F;&#x5426;&#x4ECE;&#x5176;&#x5B83;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x540C;&#x6B65;&#x670D;&#x52A1;&#x5217;&#x8868;(&#x5355;&#x8282;&#x70B9;&#x4E0D;&#x542F;&#x7528;)</li>
+<li>eureka.client.register-with-eureka:&#x662F;&#x5426;&#x5C06;&#x81EA;&#x5DF1;&#x4F5C;&#x4E3A;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x5230;&#x5176;&#x4ED6;Eureka&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;(&#x5355;&#x8282;&#x70B9;&#x4E0D;&#x542F;&#x7528;)</li>
+</ul>
+<h2 class="mume-header" id="%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95">&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;</h2>
+
+<p>&#x4E0A;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x628A;Eureka&#x670D;&#x52A1;&#x7AEF;&#x6240;&#x9700;&#x8981;&#x7684;&#x4F9D;&#x8D56;&#x4EE5;&#x53CA;&#x914D;&#x7F6E;&#x8FDB;&#x884C;&#x4E86;&#x96C6;&#x6210;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;&#x770B;&#x4E0B;&#x6548;&#x679C;&#xFF0C;Eureka&#x7ED9;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x6F02;&#x4EAE;&#x7684;&#x7BA1;&#x7406;&#x754C;&#x9762;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7BA1;&#x7406;&#x754C;&#x9762;&#x6765;&#x67E5;&#x770B;&#x6CE8;&#x518C;&#x7684;&#x670D;&#x52A1;&#x5217;&#x8868;&#x4EE5;&#x53CA;&#x670D;&#x52A1;&#x72B6;&#x6001;&#x7B49;&#x4FE1;&#x606F;&#x3002;</p>
+<blockquote>
+<p>&#x6D4B;&#x8BD5;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x901A;&#x8FC7;Application&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x542F;&#x52A8;Eureka Server</li>
+<li>&#x5728;&#x672C;&#x5730;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;http://localhost:8880&#xFF0C;8880&#x7AEF;&#x53E3;&#x53F7;&#x662F;&#x6211;&#x4EEC;&#x5728;application.yml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x8BBE;&#x7F6E;&#x7684;server.port&#x7684;&#x503C;&#x3002;</li>
+<li>&#x6210;&#x529F;&#x8BBF;&#x95EE;&#x5230;Eureka Server&#x7BA1;&#x7406;&#x754C;&#x9762;</li>
+</ol>
+</blockquote>
+<p>&#x754C;&#x9762;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<br>
+<img src="..\image\Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.png" alt="Eureka&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x7BA1;&#x7406;&#x4E2D;&#x5FC3;"><br>
+&#x5BF9;&#x4E8E;&#x754C;&#x9762;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E00;&#x4E9B;Eureka Server&#x7684;&#x5065;&#x5EB7;&#x6570;&#x636E;&#x4EE5;&#x53CA;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li>server-uptime:&#x5DF2;&#x542F;&#x52A8;&#x8017;&#x65F6;</li>
+<li>current-memory-usage:&#x5F53;&#x524D;&#x5360;&#x7528;&#x5185;&#x5B58;&#x603B;&#x91CF;</li>
+<li>Instances currently registered with Eureka:&#x6CE8;&#x518C;&#x5230;&#x8BE5;&#x4E2D;&#x5FC3;&#x7684;&#x670D;&#x52A1;&#x5217;&#x8868;</li>
+<li>ipddr:&#x5F53;&#x524D;Eureka Server&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x914D;&#x7F6E;eureka.instance.ip-address&#x90A3;&#x4E48;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;IP&#x5730;&#x5740;&#x3002;</li>
+</ul>
+<p>&#xB7;&#xB7;&#xB7;&#x6B64;&#x5904;&#x7701;&#x7565;&#x4E00;&#x4E07;&#x5B57;</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
